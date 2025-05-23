@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Mahasiswa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f2f5;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .header {
+      background-color: #b3cce6;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.2rem;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-buttons a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .avatar-header {
+      width: 30px;
+      height: 30px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      border: 2px solid #b3cce6;
+    }
+
+    .profile-card {
+      background-color: #b3cce6;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .profile-nim {
+      color: #333;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .course-card {
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-header {
+      background-color: #b3cce6;
+      padding: 12px 45px 12px 12px;
+      position: relative;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+    }
+
+    .course-title {
+      font-size: 0.8rem;
+      color: #333;
+      font-weight: 500;
+      line-height: 1.2;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.5px;
+      padding-right: 5px;
+    }
+
+    .course-body {
+      background-color: #ffffff;
+      padding: 10px;
+      border: 2px solid #b3cce6;
+      border-top: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .course-header .avatar {
+      width: 28px;
+      height: 28px;
+      position: absolute;
+      top: 13px;
+      right: 12px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .schedule-card,
+    .deadline-card {
+      background-color: #b3cce6;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .schedule-title,
+    .deadline-title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .schedule-day {
+      font-weight: 600;
+      margin-bottom: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .schedule-date {
+      text-align: right;
+      font-weight: 500;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .schedule-table, .deadline-table {
+      margin-bottom: 0;
+    }
+    
+    .schedule-table td,
+    .deadline-table td,
+    .deadline-table th {
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid rgba(154, 187, 224, 0.5);
+      font-family: 'Poppins', sans-serif;
+      vertical-align: middle;
+    }
+    
+    .deadline-table th {
+      font-weight: 600;
+      border-bottom: 2px solid rgba(154, 187, 224, 0.8);
+      padding-bottom: 0.5rem;
+    }
+    
+    .schedule-table tr:last-child td,
+    .deadline-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .deadline-table td.text-end,
+    .deadline-table th.text-end {
+      font-weight: 500;
+    }
+    
+    .course-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4 mb-4">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="header-title">Dashboard Mahasiswa</h1>
+      <div class="header-buttons">
+        <a href="#">Pesan</a>
+        <span>|</span>
+        <a href="#">Logout</a>
+        <div class="avatar-header"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-8">
+        <!-- Profile Card -->
+        <div class="profile-card mb-4">
+          <h2 class="profile-name">Hi, Aulia Resty Nur Aini</h2>
+          <p class="profile-nim">23.11.5571</p>
+        </div>
+
+        <!-- Course Grid -->
+        <div class="course-container">
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Algoritma</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Riset Operasi</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Aljabar</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Pemrograman</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Pancasila</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Multimedia</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah Agama</div><div class="avatar"></div></div><div class="course-body"></div></div>
+          <div class="course-card"><div class="course-header"><div class="course-title">Mata Kuliah PKN</div><div class="avatar"></div></div><div class="course-body"></div></div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-4">
+        <!-- Schedule Card -->
+        <div class="schedule-card">
+          <h3 class="schedule-title">Jadwal Mata Kuliah</h3>
+          <div class="d-flex justify-content-between mb-2">
+            <div class="schedule-day">Senin</div>
+            <div class="schedule-date">23/12/2026</div>
+          </div>
+          <hr class="mt-1 mb-3" style="border-top: 1px solid #9abbe0;" />
+          <table class="table table-borderless schedule-table">
+            <tbody>
+              <tr><td width="45%">sesi 1 (7,5,2)</td><td width="5%" class="text-center">-</td><td>Riset Operasi</td></tr>
+              <tr><td>sesi 2 (4,3,1)</td><td class="text-center">-</td><td>Algoritma</td></tr>
+              <tr><td>sesi 3 (2,4,3)</td><td class="text-center">-</td><td>Pemrograman</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Deadline Card -->
+        <div class="deadline-card">
+          <h3 class="deadline-title">Deadline Tugas !</h3>
+          <table class="table table-borderless deadline-table">
+            <thead>
+              <tr><th>Mata Kuliah</th><th class="text-end">Tanggal</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Algoritma</td><td class="text-end">15/05/2025</td></tr>
+              <tr><td>Riset</td><td class="text-end">13/03/2025</td></tr>
+              <tr><td>Pemro</td><td class="text-end">16/07/2025</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const courseCards = document.querySelectorAll('.course-card');
+
+    courseCards.forEach(card => {
+      card.addEventListener('click', function () {
+        const title = this.querySelector('.course-title').innerText.trim();
+        const mataKuliah = title.replace('Mata Kuliah', '').trim();
+        const encoded = encodeURIComponent(mataKuliah);
+        window.location.href = `kelas-mhs.html?matkul=${encoded}`;
+      });
+
+      card.addEventListener('mouseover', function () {
+        this.style.transform = 'scale(1.05)';
+        this.style.transition = 'transform 0.3s';
+        this.style.cursor = 'pointer';
+        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+      });
+
+      card.addEventListener('mouseout', function () {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+      });
+    });
+
+    const logoutBtn = document.querySelector('.header-buttons a:last-of-type');
+    logoutBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (confirm('Anda yakin ingin keluar?')) {
+        alert('Anda telah keluar dari sistem');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
